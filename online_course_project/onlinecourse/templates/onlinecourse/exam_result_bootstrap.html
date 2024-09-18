@@ -1,0 +1,12 @@
+<h2>Exam Results for {{ course.name }}</h2>
+<p>Total Score: {{ total_score }}</p>
+<ul>
+    {% for question in course.question_set.all %}
+        <li>{{ question.text }}</li>
+        <ul>
+            {% for choice in question.choice_set.all %}
+                <li>{{ choice.text }} - {% if choice.id in submission.choices.values_list('id', flat=True) %}Selected{% endif %}</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</ul>

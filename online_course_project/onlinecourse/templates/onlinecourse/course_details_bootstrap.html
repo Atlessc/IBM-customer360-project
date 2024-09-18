@@ -1,0 +1,11 @@
+<h2>{{ course.name }}</h2>
+<form method="post" action="{% url 'submit' course.id %}">
+    {% csrf_token %}
+    {% for question in course.question_set.all %}
+        <h4>{{ question.text }}</h4>
+        {% for choice in question.choice_set.all %}
+            <input type="checkbox" name="choices" value="{{ choice.id }}"> {{ choice.text }}<br>
+        {% endfor %}
+    {% endfor %}
+    <button type="submit">Submit Exam</button>
+</form>
